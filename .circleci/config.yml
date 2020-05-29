@@ -1,8 +1,46 @@
 version: 2.1
+orbs:
+  win: circleci/windows@2.2.0
 jobs:
-  build:
+  build_macos:
+    macos:  # indicate that we are using the macOS executor
+      xcode: 11.3.0 # indicate our selected version of Xcode
+    steps: # a series of commands to run
+      # - checkout  # pull down code from your version control system.
+      - run:
+          # Install kind via brew
+          name: Install brew
+          command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+      - run:
+          # build our application
+          name: Installing kubectl
+          command: brew install kubernetes-cli
+
+  build_win:
+    build:
+    executor:
+      name: win/default
+      shell: powershell.exe
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+
+  build_linux:
     docker:
       - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
     steps:
       - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - run: echo "hola mundo"  
+
+workflows:
+  build-test-lint:
+    jobs:
+      - build_win
+      - build_linux
+      - build_macos
