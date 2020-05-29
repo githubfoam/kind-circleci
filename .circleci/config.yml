@@ -36,11 +36,11 @@ jobs:
       - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
     steps:
       - checkout # check out the code in the project directory
-      - run: echo "hola mundo"  
+      - run: echo "hola mundo"
 
 workflows:
   build-test-lint:
     jobs:
       - build_win
-      - build_linux
+      # - build_linux
       - build_macos
