@@ -3,18 +3,19 @@ orbs:
   win: circleci/windows@2.2.0
 jobs:
 
-  build_macos:
-    macos:  
-      xcode: 11.3.0 
-    environment:
-      HOMEBREW_NO_AUTO_UPDATE: 1
-    steps: 
-      - run:
-          name: Install brew # Install brew via script
-          command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-      - run:
-          name: Installing kubectl
-          command: brew install kubernetes-cli
+  # Apologies! Your build didn’t run because you haven’t selected a plan that includes macOS yet
+  # build_macos:
+  #   macos:  
+  #     xcode: 11.3.0 
+  #   environment:
+  #     HOMEBREW_NO_AUTO_UPDATE: 1
+  #   steps: 
+  #     - run:
+  #         name: Install brew # Install brew via script
+  #         command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  #     - run:
+  #         name: Installing kubectl
+  #         command: brew install kubernetes-cli
 
   build_win:
     build:
@@ -42,5 +43,5 @@ workflows:
   build-test-lint:
     jobs:
       - build_win
-      # - build_linux
-      - build_macos
+      - build_linux
+      # - build_macos
