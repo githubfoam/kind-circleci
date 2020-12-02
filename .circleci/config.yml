@@ -2,17 +2,17 @@ version: 2.1
 orbs:
   win: circleci/windows@2.2.0
 jobs:
+
   build_macos:
-    macos:  # indicate that we are using the macOS executor
-      xcode: 11.3.0 # indicate our selected version of Xcode
-    steps: # a series of commands to run
-      # - checkout  # pull down code from your version control system.
+    macos:  
+      xcode: 11.3.0 
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    steps: 
       - run:
-          # Install kind via brew
-          name: Install brew
+          name: Install brew # Install brew via script
           command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
       - run:
-          # build our application
           name: Installing kubectl
           command: brew install kubernetes-cli
 
