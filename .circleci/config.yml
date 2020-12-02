@@ -3,20 +3,6 @@ orbs:
   win: circleci/windows@2.2.0
 jobs:
 
-  # Apologies! Your build didn’t run because you haven’t selected a plan that includes macOS yet
-  # build_macos:
-  #   macos:  
-  #     xcode: 11.3.0 
-  #   environment:
-  #     HOMEBREW_NO_AUTO_UPDATE: 1
-  #   steps: 
-  #     - run:
-  #         name: Install brew # Install brew via script
-  #         command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  #     - run:
-  #         name: Installing kubectl
-  #         command: brew install kubernetes-cli
-
   build_win:
     build:
     executor:
@@ -43,14 +29,21 @@ jobs:
             uname -a
             cat /etc/issue
             cat /etc/os-release  
-      # snap: command not found   
-      # - run: 
-      #     name: "Make sure snap installed"
-      #     command: snap --version
 
-workflows:
-  build-test-lint:
-    jobs:
-      - build_win
-      - build_linux
-      # - build_macos
+
+# workflows:
+#   commit-parallel-workflow:
+#     jobs:
+#       - build_win
+#       - build_linux
+#   scheduled-workflow:
+#     triggers:
+#       - schedule:        
+#           cron: "0,15,30,45 * * * *" # three times every hour, at minutes 0, 15, 30, 45
+#           filters:
+#             branches:
+#               only: 
+#               - test
+#     jobs:
+#       - build_win
+#       - build_linux
