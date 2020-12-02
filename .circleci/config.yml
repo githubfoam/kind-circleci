@@ -31,19 +31,19 @@ jobs:
             cat /etc/os-release  
 
 
-# workflows:
-#   commit-parallel-workflow:
-#     jobs:
-#       - build_win
-#       - build_linux
-#   scheduled-workflow:
-#     triggers:
-#       - schedule:        
-#           cron: "0,15,30,45 * * * *" # three times every hour, at minutes 0, 15, 30, 45
-#           filters:
-#             branches:
-#               only: 
-#               - test
-#     jobs:
-#       - build_win
-#       - build_linux
+workflows:
+  commit-parallel-workflow:
+    jobs:
+      - build_win
+      - build_linux
+  scheduled-workflow:
+    triggers:
+      - schedule:        
+          cron: "0,15,30,45 * * * *" # at minutes 0, 15, 30, 45
+          filters:
+            branches:
+              only: 
+              - test
+    jobs:
+      - build_win
+      - build_linux
