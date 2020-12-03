@@ -1,12 +1,11 @@
-# This is a basic workflow to help you get started with Actions
-
 name: osmatrix
 
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
     # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#schedule
-    - cron:  '*/15 * * * *'
+    # - cron:  '*/15 * * * *'
+    - cron:  '0 0 1 * *' # once a month
   push:
     branches: [ master ]
   pull_request:
