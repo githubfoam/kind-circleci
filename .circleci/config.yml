@@ -43,7 +43,7 @@ workflows:
           filters:
             branches:
               only: 
-              - test
+              - main
     jobs:
       - build_win
       - build_linux
