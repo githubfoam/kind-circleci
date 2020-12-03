@@ -31,11 +31,11 @@ jobs:
             cat /etc/os-release  
 
 
-# workflows:
-#   commit-parallel-workflow:
-#     jobs:
-#       - build_win
-#       - build_linux
+workflows:
+  commit-parallel-workflow:
+    jobs:
+      - build_win
+      - build_linux
 #   scheduled-workflow:
 #     triggers:
 #       - schedule:        
