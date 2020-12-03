@@ -3,10 +3,13 @@
 name: osmatrix
 
 on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '*5 * * * *' #At every 5th minute
   push:
-    branches: [ dev ]
+    branches: [ test ]
   pull_request:
-    branches: [ dev ]
+    branches: [ test ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
