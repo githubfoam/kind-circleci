@@ -13,7 +13,7 @@ jobs:
       - run: systeminfo
       - run:
           name: "Check docker"
-          shell: powershell.exe
+          shell: powershell.exe 
           command: |
             docker info
             docker run hello-world:nanoserver-1809
@@ -39,7 +39,6 @@ workflows:
   scheduled-workflow:
     triggers:
       - schedule:        
-          # cron: "0,15,30,45 * * * *" # at minutes 0, 15, 30, 45
           cron: "0 0 1 * *" # once a month
           filters:
             branches:
